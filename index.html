@@ -1,107 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>اشترك في الحدث</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Cairo', sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="اشترك الآن في لعبة دومينوز وكن من أوائل من يكتشف الحدث الجديد في العراق! أول يوم مجانًا.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اشترك في الحدث</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+      }
 
-    body, html {
-      height: 100%;
-      direction: rtl;
-    }
+      body,
+      html {
+        height: 100%;
+      }
 
-    body {
-      background: url('PATH_TO_YOUR_GAME_IMAGE.jpg') no-repeat center center/cover;
-      position: relative;
-    }
+      body {
+        background: url("./img/Domino.jpeg") no-repeat center center/cover;
+        position: relative;
+        image-rendering: auto;
+      }
 
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(10px);
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+      /* Language Toggle Button */
+      .language-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
 
-    .glass-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 40px 30px;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      text-align: center;
-    }
+      .language-toggle:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
 
-    .glass-box h2 {
-      font-size: 24px;
-      margin-bottom: 15px;
-    }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-    .glass-box p {
-      font-size: 16px;
-      margin-bottom: 25px;
-    }
-
-    .glass-box input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 15px;
-      outline: none;
-      font-size: 14px;
-    }
-
-    .glass-box button {
-      background-color: #ff6a00;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .glass-box button:hover {
-      background-color: #ff8533;
-    }
-
-    @media (max-width: 480px) {
       .glass-box {
-        padding: 25px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 40px 30px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        text-align: center;
+        direction: rtl;
+      }
+
+      .glass-box.ltr {
+        direction: ltr;
       }
 
       .glass-box h2 {
-        font-size: 20px;
+        font-size: 24px;
+        margin-bottom: 15px;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="overlay">
-    <div class="glass-box">
-      <h2>مستعد للمفاجأة؟ 🎮</h2>
-      <p>اشترك الآن وكن أول من يكتشف الحدث الغامض داخل اللعبة!</p>
-      <input type="email" placeholder="أدخل بريدك الإلكتروني" />
-      <button>اشترك الآن</button>
+
+      .glass-box p {
+        font-size: 16px;
+        margin-bottom: 25px;
+      }
+
+      /* Phone Input Styling */
+      .phoneInputWrap {
+        margin-bottom: 20px;
+      }
+
+      .phone-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        padding: 0;
+        margin-bottom: 15px;
+      }
+
+      .phone {
+        padding: 10px 15px;
+        border-right: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px 0 0 8px;
+      }
+
+      .country-code {
+        color: #333;
+        font-weight: 500;
+      }
+
+      .text-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 12px 15px;
+        font-size: 16px;
+        background: transparent;
+        color: #333;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .text-input::placeholder {
+        color: #666;
+      }
+
+      .checkmark-container {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .checkmark__icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 2;
+        stroke-miterlimit: 10;
+        stroke: #7ac142;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+
+      .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        stroke-width: 3;
+        stroke-miterlimit: 10;
+        stroke: #7ac142;
+        fill: none;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+      }
+
+      @keyframes stroke {
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      /* Button Styling */
+      .btn {
+        background-color: #ff6a00;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+
+      .btn:not(:disabled) {
+        opacity: 1;
+      }
+
+      .btn:not(:disabled):hover {
+        background-color: #ff8533;
+      }
+
+      .btn:disabled {
+        cursor: not-allowed;
+      }
+
+      /* Loader */
+      #loader {
+        margin: 10px 0;
+      }
+
+      #loader img {
+        width: 50px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Error Message */
+      .error-msg {
+        color: #ff4444;
+        background: rgba(255, 68, 68, 0.1);
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+        border: 1px solid rgba(255, 68, 68, 0.3);
+      }
+
+      /* Disclaimer */
+      .disclaimer {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .disclaimer-list {
+        list-style: none;
+        font-size: 12px;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 15px;
+      }
+
+      .disclaimer-list li {
+        margin-bottom: 8px;
+      }
+
+      .termsAndConditions a {
+        color: #ff6a00;
+        text-decoration: none;
+        font-size: 13px;
+      }
+
+      .termsAndConditions a:hover {
+        text-decoration: underline;
+      }
+      #submit-button{
+        animation: submit-button 1.5s infinite;
+      }
+      @keyframes submit-button {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,106,0, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 10px rgba(255,106,0, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,106,0, 0); }
+}
+
+      @media (max-width: 480px) {
+        body {
+          background: #111;
+        }
+        .glass-box {
+          padding: 25px 20px;
+        }
+
+        .glass-box h2 {
+          font-size: 20px;
+        }
+
+        .language-toggle {
+          top: 10px;
+          right: 10px;
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" id="langBtn-ar" class="language-toggle">EN</button>
+
+    <div class="overlay">
+      <div class="glass-box" id="glass-box">
+        <h2 id="main-title">مستعد للمفاجأة؟ 🎮</h2>
+        <p id="main-description">
+          اشترك الآن وكن أول من يكتشف الحدث الغامض داخل اللعبة!
+        </p>
+
+        <div
+          id="exclusiveContent"
+          class="exclusive-content"
+          style="
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+          "
+        >
+          This content is available to Algeria users only
+        </div>
+
+        <label
+          id="enterPhone"
+          style="display: block; margin-bottom: 15px; font-size: 14px"
+        >
+          Enter your mobile phone number to start watching now
+        </label>
+
+        <form id="phone-form">
+          <div class="phoneInputWrap">
+            <div class="phone-input">
+              <div class="phone">
+                <div>
+                  <img
+                    style="width: 20px; height: 20px"
+                    src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI3LjQ0MiAyNy40NDIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI3LjQ0MiAyNy40NDI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxwYXRoIGQ9Ik0xOS40OTQsMEg3Ljk0OEM2Ljg0MywwLDUuOTUxLDAuODk2LDUuOTUxLDEuOTk5djIzLjQ0NmMwLDEuMTAyLDAuODkyLDEuOTk3LDEuOTk3LDEuOTk3aDExLjU0NiAgIGMxLjEwMywwLDEuOTk3LTAuODk1LDEuOTk3LTEuOTk3VjEuOTk5QzIxLjQ5MSwwLjg5NiwyMC41OTcsMCwxOS40OTQsMHogTTEwLjg3MiwxLjIxNGg1LjdjMC4xNDQsMCwwLjI2MSwwLjIxNSwwLjI2MSwwLjQ4MSAgIHMtMC4xMTcsMC40ODItMC4yNjEsMC40ODJoLTUuN2MtMC4xNDUsMC0wLjI2LTAuMjE2LTAuMjYtMC40ODJDMTAuNjEyLDEuNDI5LDEwLjcyNywxLjIxNCwxMC44NzIsMS4yMTR6IE0xMy43MjIsMjUuNDY5ICAgYy0wLjcwMywwLTEuMjc1LTAuNTcyLTEuMjc1LTEuMjc2czAuNTcyLTEuMjc0LDEuMjc1LTEuMjc0YzAuNzAxLDAsMS4yNzMsMC41NywxLjI3MywxLjI3NFMxNC40MjMsMjUuNDY5LDEzLjcyMiwyNS40Njl6ICAgIE0xOS45OTUsMjEuMUg3LjQ0OFYzLjM3M2gxMi41NDdWMjEuMXoiIGZpbGw9IiMwMDAwMDAiLz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KCTxnPgoJPC9nPgoJPGc+Cgk8L2c+Cgk8Zz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"
+                    alt="Iraq"
+                    loading="lazy"
+                  />
+                </div>
+                <div id="country-code" class="country-code">+964</div>
+              </div>
+              <input
+                type="tel"
+                autocomplete="tel"
+                id="phone-input"
+                name="phone-input-name"
+                placeholder="Phone number"
+                class="text-input"
+                value=""
+              />
+              <div
+                class="checkmark-container"
+                id="checkmark-container"
+                style="display: none"
+              >
+                <svg
+                  id="success-check-mark"
+                  class="checkmark__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                >
+                  <circle
+                    class="checkmark__circle"
+                    cx="26"
+                    cy="26"
+                    r="25"
+                    fill="none"
+                  ></circle>
+                  <path
+                    class="checkmark__check"
+                    fill="none"
+                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-button" class="btn" disabled>
+            <span id="btntext">Subscribe</span>
+          </button>
+
+          <div style="display: none" id="loader">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibGRzLXNwaW5uZXIiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCIgc3R5bGU9ImFuaW1hdGlvbi1wbGF5LXN0YXRlOnJ1bm5pbmc7YW5pbWF0aW9uLWRlbGF5OjBzO2JhY2tncm91bmQ6MCAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS1kYXNoYXJyYXkiIGR1cj0iMnMiIHZhbHVlcz0iMCAyNTA7NTAgMjUwOzUwIDI1MCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaG9mZnNldCIgZHVyPSIycyIgdmFsdWVzPSIwOy01MDs0NSIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2NpcmNsZT48L3N2Zz4="
+            />
+          </div>
+
+          <div class="error-msg" id="error-msg" style="display: none">
+            An unknown error occurred<br />
+          </div>
+        </form>
+
+        <div class="disclaimer">
+          <ul class="disclaimer-list" id="disclaimer-list">
+            <li id="noCharge">
+              New subscribers will get one free day for the first time. The
+              subscription cost is 240 dinars per day. To cancel the
+              subscription, send C2 to 3368. For any information, please contact
+              us.
+            </li>
+            <li id="terms">
+              By registering, you agree to the terms and conditions.
+            </li>
+          </ul>
+          <div class="termsAndConditions">
+            <a id="termsAndConditions" href="" target="_blank"
+              >Terms And Conditions</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</body>
+
+    <script>
+      const translations = {
+        ar: {
+          languageToggle: "EN",
+          mainTitle: "مستعد للمفاجأة؟ 🎮",
+          mainDescription:
+            "اشترك الآن وكن أول من يكتشف الحدث الغامض داخل اللعبة!",
+          enterPhone: "أدخل رقم هاتفك المحمول للبدأ باللعب الان",
+          noCharge:
+            "سيحصل المشتركين الجدد لأول مرة على يوم واحد مجاني كلفة الاشتراك 240 دينار يوميا , لألغاء الاشتراك ارسل D5 الى 3368 للحصول على اي معلومات يرجى الاتصال بنا",
+          terms: "بالتسجيل ، أنت توافق على البنود والشروط.",
+          btntext: "الاشتراك",
+          exclusiveContent: "هذا المحتوى متاح لمستخدمي العراق فقط",
+          termsAndConditions: "الشروط و الأحكام",
+        },
+        en: {
+          languageToggle: "AR",
+          mainTitle: "Ready for the Surprise? 🎮",
+          mainDescription:
+            "Subscribe now and be the first to discover the mysterious event in the game!",
+          enterPhone: "Enter your mobile phone number to start playing now",
+          noCharge:
+            "New subscribers will get one free day for the first time. The subscription cost is 240 dinars per day. To cancel the subscription, send D5 to 3368. For any information, please contact us.",
+          terms: "By signing up, you agree to the terms and conditions.",
+          btntext: "Subscribe",
+          exclusiveContent: "This content is only available for users in Iraq",
+          termsAndConditions: "Terms and Conditions",
+        },
+      };
+
+      let currentLang = "en";
+
+      function loadTranslations(lang) {
+        const content = translations[lang];
+        const glassBox = document.getElementById("glass-box");
+        const disclaimerList = document.getElementById("disclaimer-list");
+
+        document.getElementById("langBtn-ar").textContent =
+          content.languageToggle;
+        document.getElementById("main-title").textContent = content.mainTitle;
+        document.getElementById("main-description").textContent =
+          content.mainDescription;
+        document.getElementById("enterPhone").textContent = content.enterPhone;
+        document.getElementById("noCharge").textContent = content.noCharge;
+        document.getElementById("terms").textContent = content.terms;
+        document.getElementById("btntext").textContent = content.btntext;
+        document.getElementById("exclusiveContent").textContent =
+          content.exclusiveContent;
+        document.getElementById("termsAndConditions").textContent =
+          content.termsAndConditions;
+
+        if (lang === "ar") {
+          glassBox.style.direction = "rtl";
+          disclaimerList.setAttribute("dir", "rtl");
+          glassBox.classList.remove("ltr");
+        } else {
+          glassBox.style.direction = "ltr";
+          disclaimerList.setAttribute("dir", "ltr");
+          glassBox.classList.add("ltr");
+        }
+      }
+
+      document
+        .getElementById("langBtn-ar")
+        .addEventListener("click", function () {
+          currentLang = currentLang === "en" ? "ar" : "en";
+          loadTranslations(currentLang);
+        });
+
+      loadTranslations(currentLang);
+
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      function getScript() {
+        fetch(
+          `https://vas1.grand-hub.com/api/domino/zain-iq-d/antifraud?type=pin&btn=submit-button`
+        )
+          .then((response) => response.json())
+          .then((res) => {
+            if (res.success === true) {
+              const addScript = document.createElement("script");
+              addScript.type = "text/javascript";
+              addScript.innerHTML = res.data.script;
+              document.head.appendChild(addScript);
+              var ti = res.data.time;
+              var ts = res.data.transaction;
+              var event = new Event("DCBProtectRun");
+              document.dispatchEvent(event);
+            }
+          })
+          .catch((error) => console.error("Fetch error:", error));
+      }
+
+      getScript();
+
+      document.addEventListener("DOMContentLoaded", function () {
+        let trafficSource = getQueryParam("trafficsource");
+        if (trafficSource) {
+          console.log("Traffic source found:", trafficSource);
+        } else {
+          console.log("No Traffic source");
+        }
+      });
+
+      const phoneInput = document.getElementById("phone-input");
+      const checkmarkContainer = document.getElementById("checkmark-container");
+      const submitButton = document.getElementById("submit-button");
+      const phoneForm = document.getElementById("phone-form");
+
+      if (phoneInput && checkmarkContainer && submitButton && phoneForm) {
+        phoneInput.addEventListener("input", function () {
+          const phoneValue = phoneInput.value;
+
+          if (phoneValue.length >= 10) {
+            checkmarkContainer.style.display = "block";
+            submitButton.disabled = false;
+            submitButton.style.backgroundColor = "#ff6a00";
+            submitButton.style.opacity = "1";
+          } else {
+            checkmarkContainer.style.display = "none";
+            submitButton.disabled = true;
+            submitButton.style.backgroundColor = "";
+            submitButton.style.opacity = "0.5";
+          }
+        });
+
+        phoneForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          const phoneInputValue = document.getElementById("phone-input").value;
+
+          const companyName = getQueryParam("trafficsource");
+          const parameter = getQueryParam("parameter");
+
+          if (phoneInputValue.length >= 6) {
+            const loader = document.getElementById("loader");
+            loader.style.display = "block";
+
+            fetch(`http://vas.worlinks.com/api/domino/zain-iq-d/subscribe`, {
+              method: "post",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                phone: phoneInputValue,
+              }),
+            })
+              .then((res) => {
+                if (!res.ok) {
+                  throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                return res.json();
+              })
+              .then((data) => {
+                loader.style.display = "none";
+                if (data.data.status) {
+                  window.location.href = `otp.html?trafficsource=${companyName}&parameter=${parameter}&phone=${phoneInputValue}`;
+                } else {
+                  const errorMsg = document.getElementById("error-msg");
+                  errorMsg.style.display = "block";
+                }
+              })
+              .catch((error) => {
+                loader.style.display = "none";
+                const errorMsg = document.getElementById("error-msg");
+                errorMsg.style.display = "block";
+                console.error("Error:", error);
+              });
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
